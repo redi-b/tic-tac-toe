@@ -20,11 +20,9 @@ public class TicTacToe extends JFrame {
     JLabel label;
     JButton reset;
 
-    int gridSize = 3;
-
     int turn = 0;
-    Character[][] game = new Character[gridSize][gridSize];
-    JButton[] buttons = new JButton[gridSize * gridSize];
+    Character[][] game;
+    JButton[] buttons;
 
     WinType winType;
     int winRowColIdx;
@@ -35,9 +33,22 @@ public class TicTacToe extends JFrame {
 
     ButtonListener btnListener = new ButtonListener(this);
 
+    int gridSize;
+
     TicTacToe() {
+
+        String gridSizeString = JOptionPane.showInputDialog("Enter the grid size:");
+        if (gridSizeString == null) {
+            System.exit(0); // Close the program
+        }
+        gridSize = Integer.parseInt(gridSizeString);
+
+        game = new Character[gridSize][gridSize];
+        buttons = new JButton[gridSize * gridSize];
+
         setSize((gridSize + 1) * 100, (gridSize + 1) * 100);
-        if (gridSize >= 7) setSize(700, 700);
+        if (gridSize >= 7)
+            setSize(700, 700);
         setTitle("Tic Tac Toe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
